@@ -12,6 +12,10 @@ pub struct Opts {
     /// Specify an executable to run and notify when it finishes
     #[clap(short, long)]
     pub run: Option<String>,
+
+    /// Where should the notification be sent to
+    #[clap(short, long, default_value = "local")]
+    pub destination: String,
 }
 
 pub fn parse_opts() -> Opts {
