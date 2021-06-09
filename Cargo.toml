@@ -1,5 +1,5 @@
 [package]
-name = "rust"
+name = "sup"
 version = "0.1.0"
 authors = ["Shantanu Goel <shantz@shantanugoel.com>"]
 edition = "2018"
@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 clap = "3.0.0-beta"
 notifica = "3"
+reqwest = "0.11"
