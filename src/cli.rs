@@ -15,21 +15,21 @@ pub struct Opts {
     pub run: Option<String>,
 
     #[clap(subcommand)]
-    subcmd: SubCommand,
+    pub subcmd: SubCommand,
 }
 
 /// Notifications should be sent to local system
 #[derive(Clap)]
-enum SubCommand {
+pub enum SubCommand {
     Local(Local),
     Telegram(Telegram),
 }
 
 #[derive(Clap)]
-struct Local {}
+pub struct Local {}
 
 #[derive(Clap)]
-struct Telegram {
+pub struct Telegram {
     /// Telegram chat id to which notification should be sent.
     #[clap(long)]
     pub tg_chat_id: String,
