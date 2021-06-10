@@ -20,11 +20,11 @@ impl Telegram {
     // https://api.telegram.org/bot<token>/sendMessage?chat_id=<group chat id >&text=<our text>
     pub fn send(&mut self, title: &str, msg: &str) -> Result<(), reqwest::Error> {
         let url: String = format!(
-            "https://api.telegram.org/{}/sendMessage?chat_id={}&text='{}: {}'",
+            "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text='{}: {}'",
             self.bot_token, self.chat_id, title, msg
         );
-        // TODO error handling
-        reqwest::get(url);
+        // TODO error handling and make async
+        reqwest::blocking::get(url)?.text()?;
         Ok(())
     }
 }

@@ -27,6 +27,7 @@ fn notify_telegram(
         },
         false => bot_token = tg_opts.tg_bot_token.unwrap(), // TODO: Error handling
     }
+    println!("{}", bot_token);
     let mut tg = Telegram::new();
     tg.init(tg_opts.tg_chat_id, bot_token);
 
