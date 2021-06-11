@@ -32,7 +32,6 @@ impl Telegram {
         }
     }
 
-    // TODO: Error handling
     pub fn init(&mut self, chat_id: String, bot_token: String) {
         self.chat_id = chat_id;
         self.bot_token = bot_token;

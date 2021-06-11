@@ -22,7 +22,7 @@ fn notify_telegram(
     let bot_token;
     match tg_opts.tg_bot_token_env {
         true => bot_token = env::var(TOKEN_ENV_VAR)?,
-        false => bot_token = tg_opts.tg_bot_token.unwrap(), // TODO: Error handling
+        false => bot_token = tg_opts.tg_bot_token.unwrap(),
     }
     let mut tg = Telegram::new();
     tg.init(tg_opts.tg_chat_id, bot_token);
