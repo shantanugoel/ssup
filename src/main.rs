@@ -19,7 +19,7 @@ fn notify_telegram(
     message: &str,
 ) -> Result<(), notifica::Error> {
     // TODO separate out init and do it in parallel with app run, where needed
-    let mut bot_token;
+    let bot_token;
     match tg_opts.tg_bot_token_env {
         true => match env::var(TOKEN_ENV_VAR) {
             Ok(val) => bot_token = val,
