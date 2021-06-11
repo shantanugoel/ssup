@@ -9,7 +9,6 @@ use telegram::Telegram;
 
 static TOKEN_ENV_VAR: &str = "SUP_TG_BOT_TOKEN";
 
-// TODO add error handling/returning
 fn notify_local(title: &str, message: &str) -> Result<(), notifica::Error> {
     notifica::notify(title, message)
 }
@@ -18,7 +17,7 @@ fn notify_telegram(
     tg_opts: cli::Telegram,
     title: &str,
     message: &str,
-) -> Result<(), env::VarError> {
+) -> Result<(), Box<dyn Error>> {
     // TODO separate out init and do it in parallel with app run, where needed
     let bot_token;
     match tg_opts.tg_bot_token_env {
@@ -28,10 +27,7 @@ fn notify_telegram(
     let mut tg = Telegram::new();
     tg.init(tg_opts.tg_chat_id, bot_token);
 
-    // TODO Use/fix error handling
-    tg.send(title, message);
-
-    Ok(())
+    tg.send(title, message)
 }
 
 fn main() {
@@ -57,6 +53,7 @@ fn main() {
             title += ": Unsuccessful"
         }
     }
+
     match opts.subcmd {
         cli::SubCommand::Local(_) => {
             if let Err(e) = notify_local(title.as_str(), opts.message.as_str()) {
