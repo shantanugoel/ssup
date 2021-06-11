@@ -1,4 +1,5 @@
 use std::env;
+use std::error::Error;
 use std::process::Command;
 
 mod cli;
@@ -17,17 +18,13 @@ fn notify_telegram(
     tg_opts: cli::Telegram,
     title: &str,
     message: &str,
-) -> Result<(), notifica::Error> {
+) -> Result<(), env::VarError> {
     // TODO separate out init and do it in parallel with app run, where needed
     let bot_token;
     match tg_opts.tg_bot_token_env {
-        true => match env::var(TOKEN_ENV_VAR) {
-            Ok(val) => bot_token = val,
-            Err(e) => return Ok(()), // TODO: need to return error here
-        },
+        true => bot_token = env::var(TOKEN_ENV_VAR)?,
         false => bot_token = tg_opts.tg_bot_token.unwrap(), // TODO: Error handling
     }
-    println!("{}", bot_token);
     let mut tg = Telegram::new();
     tg.init(tg_opts.tg_chat_id, bot_token);
 
@@ -37,7 +34,7 @@ fn notify_telegram(
     Ok(())
 }
 
-fn main() -> Result<(), notifica::Error> {
+fn main() {
     let opts: cli::Opts = cli::parse_opts();
     let mut title = String::from("Sup!");
 
@@ -61,9 +58,15 @@ fn main() -> Result<(), notifica::Error> {
         }
     }
     match opts.subcmd {
-        cli::SubCommand::Local(_) => notify_local(title.as_str(), opts.message.as_str()),
+        cli::SubCommand::Local(_) => {
+            if let Err(e) = notify_local(title.as_str(), opts.message.as_str()) {
+                println!("sup error: {}", e);
+            }
+        }
         cli::SubCommand::Telegram(tg_opts) => {
-            notify_telegram(tg_opts, title.as_str(), opts.message.as_str())
+            if let Err(e) = notify_telegram(tg_opts, title.as_str(), opts.message.as_str()) {
+                println!("sup error: {}", e);
+            }
         }
     }
 }
