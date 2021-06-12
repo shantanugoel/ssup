@@ -61,6 +61,10 @@ jobs:
               sudo apt update
               sudo apt-get install -y libdbus-1-dev
           fi
+          if [[ ${{ matrix.job.target }} == aarch64-unknown-linux-gnu ]]; then
+              sudo apt update
+              sudo apt-get install -y binutils-aarch64-linux-gnu libdbus-1-dev:arm64
+          fi
       - name: Cargo build
         uses: actions-rs/cargo@v1
         with:
@@ -69,13 +73,6 @@ jobs:
           toolchain: ${{ matrix.rust }}
           args: --release --target ${{ matrix.job.target }}
 
-      - name: install strip command
-        shell: bash
-        run: |
-          if [[ ${{ matrix.job.target }} == aarch64-unknown-linux-gnu ]]; then
-              sudo apt update
-              sudo apt-get install -y binutils-aarch64-linux-gnu libdbus-1-dev:arm64
-          fi
       - name: Packaging final binary
         shell: bash
         run: |
