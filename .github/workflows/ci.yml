@@ -8,6 +8,8 @@ jobs:
     name: Test Suite
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -25,6 +27,8 @@ jobs:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -44,6 +48,8 @@ jobs:
     name: Clippy
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -63,6 +69,8 @@ jobs:
     name: Docs
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -80,9 +88,11 @@ jobs:
           args: --no-deps --document-private-items --all-features --workspace
 
   coverage:
-    name: Code coverage
+    name: Code coverage if ${{ false }}
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install stable toolchain
