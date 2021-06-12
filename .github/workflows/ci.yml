@@ -1,15 +1,14 @@
 on:
   push:
-    branches: main
+    branches: [main, master]
   pull_request:
 name: Continuous Integration
+
 jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -21,14 +20,12 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --all-features --workspace
+          args: --workspace
 
   rustfmt:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -48,8 +45,6 @@ jobs:
     name: Clippy
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -69,8 +64,6 @@ jobs:
     name: Docs
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install Rust
@@ -91,8 +84,6 @@ jobs:
     name: Code coverage
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: sudo apt install libdbus-1-dev
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install stable toolchain
@@ -104,7 +95,7 @@ jobs:
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
         with:
-          args: "--all-features --workspace --ignore-tests --out Lcov"
+          args: "--ignore-tests --out Lcov"
       - name: Upload to Coveralls
         # upload only if push
         if: ${{ github.event_name == 'push' }}
