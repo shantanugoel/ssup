@@ -53,14 +53,6 @@ jobs:
           override: true
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Cargo build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          use-cross: ${{ matrix.job.use-cross }}
-          toolchain: ${{ matrix.rust }}
-          args: --release --target ${{ matrix.job.target }}
-
       - name: Install dependencies
         shell: bash
         run: |
@@ -68,6 +60,13 @@ jobs:
               sudo apt update
               sudo apt-get install -y libdbus-1-dev
           fi
+      - name: Cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          use-cross: ${{ matrix.job.use-cross }}
+          toolchain: ${{ matrix.rust }}
+          args: --release --target ${{ matrix.job.target }}
 
       - name: install strip command
         shell: bash
