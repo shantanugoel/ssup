@@ -11,7 +11,7 @@
 - x86_64
 
 ## Currently supported notification targets
-- local (i.e. System notifications)
+- local (i.e. System notifications, this is provided by the great `notifica` crate)
 - telegram
 
 ## CLI Options
