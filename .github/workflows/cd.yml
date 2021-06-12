@@ -31,18 +31,19 @@ jobs:
             architecture: x86_64
             binary-postfix: ".exe"
             use-cross: false
-          - os: ubuntu-latest
-            os-name: linux
-            target: aarch64-unknown-linux-gnu
-            architecture: arm64
-            binary-postfix: ""
-            use-cross: true
-          - os: ubuntu-latest
-            os-name: linux
-            target: i686-unknown-linux-gnu
-            architecture: i686
-            binary-postfix: ""
-            use-cross: true
+          # Disabling below cross builds for now as they aren't compiling
+          # - os: ubuntu-latest
+          #   os-name: linux
+          #   target: aarch64-unknown-linux-gnu
+          #   architecture: arm64
+          #   binary-postfix: ""
+          #   use-cross: true
+          # - os: ubuntu-latest
+          #   os-name: linux
+          #   target: i686-unknown-linux-gnu
+          #   architecture: i686
+          #   binary-postfix: ""
+          #   use-cross: true
 
     steps:
       - name: Installing Rust toolchain
