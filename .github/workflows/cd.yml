@@ -61,6 +61,14 @@ jobs:
           toolchain: ${{ matrix.rust }}
           args: --release --target ${{ matrix.job.target }}
 
+      - name: Install dependencies
+        shell: bash
+        run: |
+          if [[ ${{ matrix.job.os }} == ubuntu-latest ]]; then
+              sudo apt update
+              sudo apt-get install -y libdbus-1-dev
+          fi
+
       - name: install strip command
         shell: bash
         run: |
