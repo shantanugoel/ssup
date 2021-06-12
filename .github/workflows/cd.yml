@@ -3,7 +3,7 @@ name: Continuous Deployment
 on:
   push:
     tags:
-      - "[0-9]+.[0-9]+.[0-9]+"
+      - "v*.*.*"
 
 jobs:
   publish:
@@ -32,12 +32,12 @@ jobs:
             binary-postfix: ".exe"
             use-cross: false
           # Disabling below cross builds for now as they aren't compiling
-          - os: ubuntu-latest
-            os-name: linux
-            target: aarch64-unknown-linux-gnu
-            architecture: arm64
-            binary-postfix: ""
-            use-cross: true
+          # - os: ubuntu-latest
+          #   os-name: linux
+          #   target: aarch64-unknown-linux-gnu
+          #   architecture: arm64
+          #   binary-postfix: ""
+          #   use-cross: true
           # - os: ubuntu-latest
           #   os-name: linux
           #   target: i686-unknown-linux-gnu
