@@ -2,11 +2,9 @@ use std::process::Command;
 
 use clap::{crate_authors, crate_description, crate_version, AppSettings, Clap};
 
-/// Send a system notification
 #[derive(Clap)]
 #[clap(author = crate_authors!(), version=crate_version!(), about=crate_description!())]
 #[clap(setting = AppSettings::ColoredHelp, setting = AppSettings::DeriveDisplayOrder)]
-
 pub struct Opts {
     /// Optional title for the notification
     #[clap(short, long, default_value = "Sup!")]
@@ -16,7 +14,7 @@ pub struct Opts {
     #[clap(short, long)]
     pub message: String,
 
-    // Choose where to send the notification to
+    /// Choose where to send the notification to
     #[clap(short, long, possible_values=&["local", "telegram"], default_value="local")]
     pub destination: String,
 

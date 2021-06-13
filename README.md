@@ -34,7 +34,7 @@ FLAGS:
 OPTIONS:
 -t, --title <title>                Optional title for the notification [default: Sup!]
 -m, --message <message>            Notify with this message
--d, --destination <destination>    [default: local] [possible values: local, telegram]
+-d, --destination <destination>    Choose where to send the notification to [default: local] [possible values: local, telegram]
     --chat-id <chat-id>            {Telegram specific option} Chat id to which notification should be sent
     --bot-token <bot-token>        {Telegram specific option } Optionally specify Telegram bot token in command instead of reading from env
 ```
