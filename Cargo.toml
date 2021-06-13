@@ -9,7 +9,9 @@ edition = "2018"
 [dependencies]
 clap = "3.0.0-beta"
 notifica = "3"
+log = "0.4"
+env_logger = "0.8"
 
 [dependencies.reqwest]
-project.version = "0.11"
+version = "0.11"
 features = ["blocking"]

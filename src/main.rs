@@ -2,6 +2,8 @@ use std::env;
 use std::error::Error;
 use std::process::Command;
 
+use log::{error};
+
 mod cli;
 mod telegram;
 
@@ -30,6 +32,7 @@ fn notify_telegram(
 }
 
 fn main() {
+    env_logger::init();
     let opts: cli::Opts = cli::parse_opts();
     let mut title = String::from("Sup!");
 
@@ -56,12 +59,12 @@ fn main() {
     match opts.subcmd {
         cli::SubCommand::Local(_) => {
             if let Err(e) = notify_local(title.as_str(), opts.message.as_str()) {
-                println!("sup error: {}", e);
+                error!("{}", e);
             }
         }
         cli::SubCommand::Telegram(tg_opts) => {
             if let Err(e) = notify_telegram(tg_opts, title.as_str(), opts.message.as_str()) {
-                println!("sup error: {}", e);
+                error!("sup error: {}", e);
             }
         }
     }
