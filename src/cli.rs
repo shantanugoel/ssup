@@ -35,11 +35,11 @@ pub struct Local {}
 pub struct Telegram {
     /// Telegram chat id to which notification should be sent.
     #[clap(long)]
-    pub tg_chat_id: String,
+    pub chat_id: String,
 
     /// Specify Telegram bot token in command
     #[clap(long)]
-    pub tg_bot_token: Option<String>,
+    pub bot_token: Option<String>,
 }
 
 pub fn parse_opts() -> Opts {
