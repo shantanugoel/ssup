@@ -29,22 +29,17 @@ pub enum SubCommand {
 pub struct Local {}
 
 #[derive(Clap)]
+/// Send notification to telegram. Reads the bot token value from
+/// SUP_TG_BOT_TOKEN env variable unless it is provided on the
+/// command line with tg-bot-token option
 pub struct Telegram {
     /// Telegram chat id to which notification should be sent.
     #[clap(long)]
     pub tg_chat_id: String,
 
     /// Specify Telegram bot token in command
-    #[clap(
-        long,
-        conflicts_with("tg-bot-token-env"),
-        required_unless_present("tg-bot-token-env")
-    )]
+    #[clap(long)]
     pub tg_bot_token: Option<String>,
-
-    /// Take Telegram bot token from SUP_TG_BOT_TOKEN env variable
-    #[clap(long, required_unless_present("tg-bot-token"))]
-    pub tg_bot_token_env: bool,
 }
 
 pub fn parse_opts() -> Opts {

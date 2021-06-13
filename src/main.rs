@@ -20,9 +20,9 @@ fn notify_telegram(
 ) -> Result<(), Box<dyn Error>> {
     // TODO separate out init and do it in parallel with app run, where needed
     let bot_token;
-    match tg_opts.tg_bot_token_env {
-        true => bot_token = env::var(TOKEN_ENV_VAR)?,
-        false => bot_token = tg_opts.tg_bot_token.unwrap(),
+    match tg_opts.tg_bot_token {
+        Some(token) => bot_token = token,
+        _ => bot_token = env::var(TOKEN_ENV_VAR)?,
     }
     let tg = Telegram::new(tg_opts.tg_chat_id, bot_token);
 
