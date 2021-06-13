@@ -16,54 +16,27 @@
 
 ## CLI Options
 ```
-~/dev/rust/sup/target/release main*
-19:59:16 ❯ ./sup --help
-sup
-Shantanu Goel <shantanugoel.com>
-Notifications should be sent to local system
+20:53:15 ❯ ./sup -h
+sup 0.2.0
+Shantanu Goel <shantanu+sup@shantanugoel.com>
+A utility to send notifications to local system or telegram
 
 USAGE:
-sup [OPTIONS] <SUBCOMMAND>
+sup [OPTIONS] --message <message> [command]
+
+ARGS:
+<command>    Specify a command/executable to run and notify when it finishes
 
 FLAGS:
 -h, --help       Prints help information
 -V, --version    Prints version information
 
 OPTIONS:
--m, --message <message>    Notify with this message [default: Hey!]
--r, --run <run>            Specify an executable to run and notify when it finishes
-
-SUBCOMMANDS:
-local
-telegram
-help        Prints this message or the help of the given subcommand(s)
-
-~/dev/rust/sup/target/release main*
-19:59:25 ❯ ./sup help local
-sup-local
-
-USAGE:
-sup local
-
-FLAGS:
--h, --help       Prints help information
--V, --version    Prints version information
-
-~/dev/rust/sup/target/release main*
-19:59:32 ❯ ./sup help telegram
-sup-telegram
-
-USAGE:
-sup telegram [FLAGS] [OPTIONS] --tg-chat-id <tg-chat-id>
-
-FLAGS:
--h, --help                Prints help information
---tg-bot-token-env    Take Telegram bot token from SUP_TG_BOT_TOKEN env variable
--V, --version             Prints version information
-
-OPTIONS:
---tg-bot-token <tg-bot-token>    Specify Telegram bot token in command
---tg-chat-id <tg-chat-id>        Telegram chat id to which notification should be sent
+-t, --title <title>                Optional title for the notification [default: Sup!]
+-m, --message <message>            Notify with this message
+-d, --destination <destination>    [default: local] [possible values: local, telegram]
+    --chat-id <chat-id>            {Telegram specific option} Chat id to which notification should be sent
+    --bot-token <bot-token>        {Telegram specific option } Optionally specify Telegram bot token in command instead of reading from env
 ```
 
 ## Telegram Usage
