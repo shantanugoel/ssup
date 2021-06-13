@@ -2,7 +2,7 @@ use std::env;
 use std::error::Error;
 use std::process::Command;
 
-use log::{error};
+use log::error;
 
 mod cli;
 mod telegram;

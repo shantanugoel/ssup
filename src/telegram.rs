@@ -22,10 +22,7 @@ impl std::error::Error for TgSendError {}
 
 impl Telegram {
     pub fn new(chat_id: String, bot_token: String) -> Telegram {
-        Telegram {
-            bot_token: bot_token,
-            chat_id: chat_id,
-        }
+        Telegram { bot_token, chat_id }
     }
 
     pub fn send(&self, title: &str, msg: &str) -> Result<(), Box<dyn Error>> {
