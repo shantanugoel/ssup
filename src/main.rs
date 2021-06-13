@@ -65,7 +65,7 @@ fn main() {
         }
         "telegram" => {
             if let Err(e) = notify_telegram(opts.bot_token, opts.chat_id, title_str, msg_str) {
-                error!("sup error: {}", e);
+                error!("{}", e);
             }
         }
         s => error!("Unrecognized target {}. This should never happen!", s),
