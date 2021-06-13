@@ -1,8 +1,9 @@
 [package]
 name = "sup"
 version = "0.1.0"
-authors = ["Shantanu Goel <shantz@shantanugoel.com>"]
+authors = ["Shantanu Goel <shantanu+sup@shantanugoel.com>"]
 edition = "2018"
+description = "A utility to send notifications to local system or telegram"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

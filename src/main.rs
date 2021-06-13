@@ -1,6 +1,5 @@
 use std::env;
 use std::error::Error;
-use std::process::Command;
 
 use log::error;
 
@@ -33,31 +32,17 @@ fn notify_telegram(
 fn main() {
     env_logger::init();
     let opts: cli::Opts = cli::parse_opts();
-    let mut title = String::from("Sup!");
+    let mut title = opts.title.clone();
 
-    // TODO: Do this in a separate thread / async
-    if let Some(run) = opts.command {
-        let split_cmd: Vec<&str> = run.split(' ').collect();
-        let executable = split_cmd[0];
-        let mut cmd = Command::new(&executable);
-        if split_cmd.len() > 1 {
-            cmd.args(&split_cmd[1..]);
-        }
-
-        let status = cmd.status().expect("Could not parse command exit status");
-
-        title.clear();
-        title.push_str(executable);
-        if status.success() {
-            title += ": Successful";
-        } else {
-            title += ": Unsuccessful"
+    if let Some(result) = opts.run_command() {
+        match result {
+            true => title += ": Successful",
+            false => title += ": Unsuccessful",
         }
     }
-
     let msg_str = opts.message.as_str();
     let title_str = title.as_str();
-    match opts.target.as_str() {
+    match opts.destination.as_str() {
         "local" => {
             if let Err(e) = notify_local(title_str, msg_str) {
                 error!("{}", e);
