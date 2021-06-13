@@ -40,9 +40,10 @@ impl Opts {
         // TODO: Do this in a separate thread / async
         match &self.command {
             Some(run) => {
-                let split_cmd: Vec<&str> = run.split(' ').collect();
-                let executable = split_cmd[0];
-                let mut cmd = Command::new(&executable);
+                // let split_cmd: Vec<&str> = run.split(' ').collect();
+                // let executable = split_cmd[0];
+                let split_cmd: Vec<String> = shlex::Shlex::new(run).by_ref().collect();
+                let mut cmd = Command::new(&split_cmd[0]);
                 if split_cmd.len() > 1 {
                     cmd.args(&split_cmd[1..]);
                 }

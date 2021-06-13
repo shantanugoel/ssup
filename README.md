@@ -1,6 +1,26 @@
 # sup!
 
-`sup` is a simple cross-platform tool to send notifications via cli. It also supports an option to optionally run a given command and then send the notification once the command finishes execution.
+`sup` is a simple cross-platform tool to send notifications via cli to local system or telegram.
+It can also be used to get alerted after a long-running (or otherwise) command finishes. This can be used either by specifying the command at the end of the sup command, or by chaining sup with other commands. See the examples/CLI options below for more.
+
+## Examples
+```
+# Send a notification to local system
+$ sup -m "Hello world!"
+
+# Send a notification to telegram
+$ export SUP_TG_BOT_TOKEN=<Your telegram bot token>
+$ sup -m "Hello world!" -d telegram -c <your-telegram-chat-id> 
+
+# Run a custom command and send notification after it finishes. Advantage of this is that sup will also report whether command was successful or not.
+$ sup -m "Hello world!" sleep 5
+
+# Alternate ways to run a custom command and send notification after it finishes
+$ sleep 5; sup -m "Hello world!"  # Always send notification
+$ sleep 5 && sup -m "Hello world!" # Send notification only on success
+$ sleep 5 || sup -m "Hello world!" # Send notification only on failure
+
+```
 
 # Currently supported platforms
 - macOS
