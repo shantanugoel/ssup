@@ -11,6 +11,7 @@ clap = "3.0.0-beta"
 notifica = "3"
 log = "0.4"
 env_logger = "0.8"
+thiserror = "1.0"
 
 [dependencies.reqwest]
 version = "0.11"

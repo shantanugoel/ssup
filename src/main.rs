@@ -16,19 +16,18 @@ fn notify_local(title: &str, message: &str) -> Result<(), notifica::Error> {
 }
 
 fn notify_telegram(
-    tg_opts: cli::Telegram,
+    bot_token: Option<String>,
+    chat_id: Option<String>,
     title: &str,
     message: &str,
 ) -> Result<(), Box<dyn Error>> {
     // TODO separate out init and do it in parallel with app run, where needed
-    let bot_token;
-    match tg_opts.bot_token {
-        Some(token) => bot_token = token,
-        _ => bot_token = env::var(TOKEN_ENV_VAR)?,
+    let token;
+    match bot_token {
+        Some(t) => token = t,
+        _ => token = env::var(TOKEN_ENV_VAR)?,
     }
-    let tg = Telegram::new(tg_opts.chat_id, bot_token);
-
-    tg.send(title, message)
+    Telegram::new(chat_id, token)?.send(title, message)
 }
 
 fn main() {
@@ -37,7 +36,7 @@ fn main() {
     let mut title = String::from("Sup!");
 
     // TODO: Do this in a separate thread / async
-    if let Some(run) = opts.run {
+    if let Some(run) = opts.command {
         let split_cmd: Vec<&str> = run.split(' ').collect();
         let executable = split_cmd[0];
         let mut cmd = Command::new(&executable);
@@ -56,16 +55,19 @@ fn main() {
         }
     }
 
-    match opts.subcmd {
-        cli::SubCommand::Local(_) => {
-            if let Err(e) = notify_local(title.as_str(), opts.message.as_str()) {
+    let msg_str = opts.message.as_str();
+    let title_str = title.as_str();
+    match opts.target.as_str() {
+        "local" => {
+            if let Err(e) = notify_local(title_str, msg_str) {
                 error!("{}", e);
             }
         }
-        cli::SubCommand::Telegram(tg_opts) => {
-            if let Err(e) = notify_telegram(tg_opts, title.as_str(), opts.message.as_str()) {
+        "telegram" => {
+            if let Err(e) = notify_telegram(opts.bot_token, opts.chat_id, title_str, msg_str) {
                 error!("sup error: {}", e);
             }
         }
+        s => error!("Unrecognized target {}. This should never happen!", s),
     }
 }

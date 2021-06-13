@@ -1,31 +1,33 @@
-use std::error::Error;
-use std::fmt;
+use thiserror::Error;
 
 pub struct Telegram {
     bot_token: String,
     chat_id: String,
 }
 
-#[derive(Debug)]
-struct TgSendError {
-    msg: String,
+#[derive(Error, Debug)]
+pub enum TelegramError {
+    #[error("Invalid Chat Id")]
+    InvalidChatId(),
+    #[error("Error from Telgram API call: {0}")]
+    ApiGetError(String),
 }
-
-impl fmt::Display for TgSendError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let error = format!("Error returned by telegram API call: {}", self.msg);
-        write!(f, "{}", error)
-    }
-}
-
-impl std::error::Error for TgSendError {}
 
 impl Telegram {
-    pub fn new(chat_id: String, bot_token: String) -> Telegram {
-        Telegram { bot_token, chat_id }
+    pub fn new(
+        chat_id: Option<String>,
+        bot_token: String,
+    ) -> Result<Telegram, Box<dyn std::error::Error>> {
+        match chat_id {
+            Some(c) => Ok(Telegram {
+                bot_token,
+                chat_id: c,
+            }),
+            _ => Err(Box::new(TelegramError::InvalidChatId())),
+        }
     }
 
-    pub fn send(&self, title: &str, msg: &str) -> Result<(), Box<dyn Error>> {
+    pub fn send(&self, title: &str, msg: &str) -> Result<(), Box<dyn std::error::Error>> {
         // https://api.telegram.org/bot<token>/sendMessage?chat_id=<group chat id >&text=<our text>
         let url: String = format!(
             "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text='{}: {}'",
@@ -35,7 +37,7 @@ impl Telegram {
         // TODO make async
         let rsp = reqwest::blocking::get(url)?;
         match rsp.status().is_success() {
-            false => Err(Box::new(TgSendError { msg: rsp.text()? })),
+            false => Err(Box::new(TelegramError::ApiGetError(rsp.text()?))),
             true => Ok(()),
         }
     }
