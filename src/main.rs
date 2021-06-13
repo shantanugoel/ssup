@@ -42,7 +42,7 @@ fn main() {
             cmd.args(&split_cmd[1..]);
         }
 
-        let status = cmd.status().unwrap();
+        let status = cmd.status().expect("Could not parse command exit status");
 
         title.clear();
         title.push_str(executable);
