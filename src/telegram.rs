@@ -18,11 +18,7 @@ impl fmt::Display for TgSendError {
     }
 }
 
-impl std::error::Error for TgSendError {
-    fn description(&self) -> &str {
-        &self.msg
-    }
-}
+impl std::error::Error for TgSendError {}
 
 impl Telegram {
     pub fn new() -> Telegram {
