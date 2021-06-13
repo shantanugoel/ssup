@@ -21,19 +21,14 @@ impl fmt::Display for TgSendError {
 impl std::error::Error for TgSendError {}
 
 impl Telegram {
-    pub fn new() -> Telegram {
+    pub fn new(chat_id: String, bot_token: String) -> Telegram {
         Telegram {
-            bot_token: String::from(""),
-            chat_id: String::from(""),
+            bot_token: bot_token,
+            chat_id: chat_id,
         }
     }
 
-    pub fn init(&mut self, chat_id: String, bot_token: String) {
-        self.chat_id = chat_id;
-        self.bot_token = bot_token;
-    }
-
-    pub fn send(&mut self, title: &str, msg: &str) -> Result<(), Box<dyn Error>> {
+    pub fn send(&self, title: &str, msg: &str) -> Result<(), Box<dyn Error>> {
         // https://api.telegram.org/bot<token>/sendMessage?chat_id=<group chat id >&text=<our text>
         let url: String = format!(
             "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text='{}: {}'",
