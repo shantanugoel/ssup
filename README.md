@@ -36,9 +36,16 @@ $ sleep 5 || sup -m "Hello world!" # Send notification only on failure
 
 ## CLI Options
 ```
-20:53:15 ❯ ./sup -h
-sup 0.2.0
-Shantanu Goel <shantanu+sup@shantanugoel.com>
+  █████  █████ ████ ████████ 
+ ███░░  ░░███ ░███ ░░███░░███
+░░█████  ░███ ░███  ░███ ░███
+ ░░░░███ ░███ ░███  ░███ ░███
+ ██████  ░░████████ ░███████ 
+░░░░░░    ░░░░░░░░  ░███░░░  
+                    ░███     
+                    █████    
+                   ░░░░░     
+sup 0.2.1 - Shantanu Goel <shantanu+sup@shantanugoel.com>
 A utility to send notifications to local system or telegram
 
 USAGE:
@@ -54,9 +61,12 @@ FLAGS:
 OPTIONS:
 -t, --title <title>                Optional title for the notification [default: Sup!]
 -m, --message <message>            Notify with this message
--d, --destination <destination>    Choose where to send the notification to [default: local] [possible values: local, telegram]
-    --chat-id <chat-id>            {Telegram specific option} Chat id to which notification should be sent
-    --bot-token <bot-token>        {Telegram specific option } Optionally specify Telegram bot token in command instead of reading from env
+-d, --destination <destination>    Choose where to send the notification to [default: local]
+[possible values: local, telegram]
+--chat-id <chat-id>            {Telegram specific option} Chat id to which notification
+should be sent
+--bot-token <bot-token>        {Telegram specific option } Optionally specify Telegram bot
+token in command instead of reading from env
 ```
 
 ## Telegram Usage

@@ -2,8 +2,28 @@ use std::process::Command;
 
 use clap::{crate_authors, crate_description, crate_version, AppSettings, Clap};
 
+const TEMPLATE: &str = "
+                             
+  █████  █████ ████ ████████ 
+ ███░░  ░░███ ░███ ░░███░░███
+░░█████  ░███ ░███  ░███ ░███
+ ░░░░███ ░███ ░███  ░███ ░███
+ ██████  ░░████████ ░███████ 
+░░░░░░    ░░░░░░░░  ░███░░░  
+                    ░███     
+                    █████    
+                   ░░░░░     
+{bin} {version} - {author}
+{about}
+
+{usage-heading}
+{usage}
+
+{all-args}
+";
+
 #[derive(Clap)]
-#[clap(author = crate_authors!(), version=crate_version!(), about=crate_description!())]
+#[clap(author = crate_authors!(), version=crate_version!(), about=crate_description!(), help_template=TEMPLATE)]
 #[clap(setting = AppSettings::ColoredHelp, setting = AppSettings::DeriveDisplayOrder)]
 pub struct Opts {
     /// Optional title for the notification
