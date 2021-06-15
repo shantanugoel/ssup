@@ -29,7 +29,7 @@ $ sleep 5 || sup -m "Hello world!" # Send notification only on failure
 
 # Currently supported architectures
 - x86_64
-- aarch64 (e.g. Raspberry Pi 4b)
+- aarch64 (e.g. Raspberry Pi 4b, Apple M1)
 
 ## Currently supported notification targets
 - local (i.e. System notifications, this is provided by the great `notifica` crate)
@@ -79,7 +79,6 @@ OPTIONS:
 
 # TODO
 - [ ] Add support for 32b (aarch32 and i686/386) linux builds
-- [ ] Add support for Apple M1 builds
 - [ ] Add custom webhook destination
 - [ ] Add tests
 - [ ] Add documentation
