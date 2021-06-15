@@ -76,3 +76,10 @@ OPTIONS:
   - You may need to install `curl` and `jq` if you don't have them already
     - Alternatively, you can enter this url in your browser `https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates` and search for `id:` to get the value
 - Use the bot token and chat id values in the CLI options given above. 
+
+# TODO
+- [ ] Add support for 32b (aarch32 and i686/386) linux builds
+- [ ] Add support for Apple M1 builds
+- [ ] Add custom webhook destination
+- [ ] Add tests
+- [ ] ?
