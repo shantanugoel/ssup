@@ -21,7 +21,7 @@ jobs:
           - os: macos-latest
             os-name: macos
             target: aarch64-apple-darwin
-            architecture: aarch64
+            architecture: arm64
             binary-postfix: ""
             use-cross: false
           - os: ubuntu-latest
