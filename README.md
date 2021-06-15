@@ -29,6 +29,7 @@ $ sleep 5 || sup -m "Hello world!" # Send notification only on failure
 
 # Currently supported architectures
 - x86_64
+- aarch64 (e.g. Raspberry Pi 4b)
 
 ## Currently supported notification targets
 - local (i.e. System notifications, this is provided by the great `notifica` crate)
