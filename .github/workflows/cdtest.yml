@@ -31,12 +31,12 @@ jobs:
             binary-postfix: ".exe"
             use-cross: false
           # Disabling below cross builds for now as they aren't compiling
-          # - os: ubuntu-latest
-          #   os-name: linux
-          #   target: aarch64-unknown-linux-gnu
-          #   architecture: arm64
-          #   binary-postfix: ""
-          #   use-cross: true
+          - os: ubuntu-latest
+            os-name: linux
+            target: aarch64-unknown-linux-gnu
+            architecture: arm64
+            binary-postfix: ""
+            use-cross: true
           # - os: ubuntu-latest
           #   os-name: linux
           #   target: i686-unknown-linux-gnu
@@ -88,7 +88,7 @@ jobs:
           "$GCC_PREFIX"strip $BINARY_NAME
 
           ########## create tar.gz ##########
-          RELEASE_NAME=sup-${GITHUB_REF/refs\/tags\//}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
+          RELEASE_NAME=sup-${GITHUB_SHA}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
           tar czvf $RELEASE_NAME.tar.gz $BINARY_NAME
 
           ########## create sha256 ##########
