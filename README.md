@@ -82,4 +82,6 @@ OPTIONS:
 - [ ] Add support for Apple M1 builds
 - [ ] Add custom webhook destination
 - [ ] Add tests
+- [ ] Add documentation
+- [ ] Package and publish to crates.io
 - [ ] ?
