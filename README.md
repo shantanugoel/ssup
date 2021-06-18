@@ -46,7 +46,7 @@ $ sleep 5 || ssup -m "Hello world!" # Send notification only on failure
                             ░███     
                             █████    
                            ░░░░░     
-ssup 0.3.4 - Shantanu Goel <shantanu+ssup@shantanugoel.com>
+ssup 0.3.5 - Shantanu Goel <shantanu+ssup@shantanugoel.com>
 A utility to send notifications to local system or telegram
 
 USAGE:

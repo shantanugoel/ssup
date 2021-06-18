@@ -126,6 +126,11 @@ jobs:
           toolchain: stable
           profile: minimal
           override: true
+      - name: Install dependencies
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt-get install -y libdbus-1-dev
       - uses: actions-rs/cargo@v1
         with:
           command: publish
