@@ -37,16 +37,16 @@ $ sleep 5 || ssup -m "Hello world!" # Send notification only on failure
 
 ## CLI Options
 ```
-  █████  █████ ████ ████████ 
- ███░░  ░░███ ░███ ░░███░░███
-░░█████  ░███ ░███  ░███ ░███
- ░░░░███ ░███ ░███  ░███ ░███
- ██████  ░░████████ ░███████ 
-░░░░░░    ░░░░░░░░  ░███░░░  
-                    ░███     
-                    █████    
-                   ░░░░░     
-ssup 0.2.1 - Shantanu Goel <shantanu+ssup@shantanugoel.com>
+   █████  █████  █████ ████ ████████ 
+  ███░░  ███░░  ░░███ ░███ ░░███░░███
+░░░█████ ░█████  ░███ ░███  ░███ ░███
+  ░░░░███░░░░███ ░███ ░███  ░███ ░███
+  ██████ ██████  ░░████████ ░███████ 
+░░░░░░░  ░░░░░    ░░░░░░░░  ░███░░░  
+                            ░███     
+                            █████    
+                           ░░░░░     
+ssup 0.3.3 - Shantanu Goel <shantanu+ssup@shantanugoel.com>
 A utility to send notifications to local system or telegram
 
 USAGE:
@@ -84,6 +84,4 @@ For linux platforms, this crate has a native dependency on libdbus, so you'd nee
 - [ ] Add support for 32b (aarch32 and i686/386) linux builds
 - [ ] Add custom webhook destination
 - [ ] Add tests
-- [ ] Add documentation
-- [ ] Package and publish to crates.io
 - [ ] ?

@@ -1,6 +1,6 @@
 [package]
 name = "ssup"
-version = "0.3.1"
+version = "0.3.3"
 authors = ["Shantanu Goel <shantanu+ssup@shantanugoel.com>"]
 edition = "2018"
 description = "A utility to send notifications to local system or telegram"
