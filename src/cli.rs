@@ -1,18 +1,19 @@
+//! Parses command line options of ssup
 use std::process::Command;
 
 use clap::{crate_authors, crate_description, crate_version, AppSettings, Clap};
 
 const TEMPLATE: &str = "
                              
-  █████  █████ ████ ████████ 
- ███░░  ░░███ ░███ ░░███░░███
-░░█████  ░███ ░███  ░███ ░███
- ░░░░███ ░███ ░███  ░███ ░███
- ██████  ░░████████ ░███████ 
-░░░░░░    ░░░░░░░░  ░███░░░  
-                    ░███     
-                    █████    
-                   ░░░░░     
+   █████  █████  █████ ████ ████████ 
+  ███░░  ███░░  ░░███ ░███ ░░███░░███
+░░░█████ ░█████  ░███ ░███  ░███ ░███
+  ░░░░███░░░░███ ░███ ░███  ░███ ░███
+  ██████ ██████  ░░████████ ░███████ 
+░░░░░░░  ░░░░░    ░░░░░░░░  ░███░░░  
+                            ░███     
+                            █████    
+                           ░░░░░     
 {bin} {version} - {author}
 {about}
 
@@ -27,7 +28,7 @@ const TEMPLATE: &str = "
 #[clap(setting = AppSettings::ColoredHelp, setting = AppSettings::DeriveDisplayOrder)]
 pub struct Opts {
     /// Optional title for the notification
-    #[clap(short, long, default_value = "Sup!")]
+    #[clap(short, long, default_value = "Ssup!")]
     pub title: String,
 
     /// Notify with this message

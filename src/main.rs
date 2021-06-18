@@ -1,3 +1,24 @@
+//! `ssup` is a simple cross-platform tool to send notifications via cli to local system or telegram.
+//! It can also be used to get alerted after a long-running (or otherwise) command finishes. This can be used either by specifying the command at the end of the ssup command, or by chaining ssup with other commands. See the examples/CLI options below for more.
+//! 
+//! ## Examples
+//! ```
+//! # Send a notification to local system
+//! $ ssup -m "Hello world!"
+//! 
+//! # Send a notification to telegram
+//! $ export SSUP_TG_BOT_TOKEN=<Your telegram bot token>
+//! $ ssup -m "Hello world!" -d telegram -c <your-telegram-chat-id> 
+//! 
+//! # Run a custom command and send notification after it finishes. Advantage of this is that ssup will also report whether command was successful or not.
+//! $ ssup -m "Hello world!" sleep 5
+//! 
+//! # Alternate ways to run a custom command and send notification after it finishes
+//! $ sleep 5; ssup -m "Hello world!"  # Always send notification
+//! $ sleep 5 && ssup -m "Hello world!" # Send notification only on success
+//! $ sleep 5 || ssup -m "Hello world!" # Send notification only on failure
+//! 
+//! ```
 use std::env;
 use std::error::Error;
 
@@ -8,7 +29,7 @@ mod telegram;
 
 use telegram::Telegram;
 
-static TOKEN_ENV_VAR: &str = "SUP_TG_BOT_TOKEN";
+static TOKEN_ENV_VAR: &str = "SSUP_TG_BOT_TOKEN";
 
 fn notify_local(title: &str, message: &str) -> Result<(), notifica::Error> {
     notifica::notify(title, message)

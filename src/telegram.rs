@@ -1,3 +1,8 @@
+//! This module allows to send notifications to a telegram chat id via your bot.
+//! Example Usage:
+//! ```
+//! Telegram::new(<chat_id>, <bot_token>)?.send(<msg_title>, <msg_text>);
+//! ```
 use thiserror::Error;
 
 pub struct Telegram {
