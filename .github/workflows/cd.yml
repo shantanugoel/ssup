@@ -89,7 +89,7 @@ jobs:
           cd target/${{ matrix.job.target }}/release
 
           ####### reduce binary size by removing debug symbols #######
-          BINARY_NAME=sup${{ matrix.job.binary-postfix }}
+          BINARY_NAME=ssup${{ matrix.job.binary-postfix }}
           if [[ ${{ matrix.job.target }} == aarch64-unknown-linux-gnu ]]; then
             GCC_PREFIX="aarch64-linux-gnu-"
           else
@@ -98,7 +98,7 @@ jobs:
           "$GCC_PREFIX"strip $BINARY_NAME
 
           ########## create tar.gz ##########
-          RELEASE_NAME=sup-${GITHUB_REF/refs\/tags\//}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
+          RELEASE_NAME=ssup-${GITHUB_REF/refs\/tags\//}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
           tar czvf $RELEASE_NAME.tar.gz $BINARY_NAME
 
           ########## create sha256 ##########
@@ -111,14 +111,13 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            target/${{ matrix.job.target }}/release/sup-*.tar.gz
-            target/${{ matrix.job.target }}/release/sup-*.sha256
+            target/${{ matrix.job.target }}/release/ssup-*.tar.gz
+            target/${{ matrix.job.target }}/release/ssup-*.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-cargo:
     name: Publishing to Cargo
-    if: ${{ false }} # Disable for now
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
