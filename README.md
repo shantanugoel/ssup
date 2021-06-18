@@ -77,6 +77,9 @@ OPTIONS:
     - Alternatively, you can enter this url in your browser `https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates` and search for `id:` to get the value
 - Use the bot token and chat id values in the CLI options given above. 
 
+# Building
+For linux platforms, this crate has a native dependency on libdbus, so you'd need to install a corresponding package (e.g. libdbus-1-dev on debian/ubuntu) before trying to compile it.
+
 # TODO
 - [ ] Add support for 32b (aarch32 and i686/386) linux builds
 - [ ] Add custom webhook destination
